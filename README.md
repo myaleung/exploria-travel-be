@@ -156,7 +156,72 @@ try {
 
 In this Challenge, you will have the opportunity to demonstrate the following competencies from the Software Engineering Progression Management framework:
 
-TBC
+---
+
+### Writes software that meets a user’s functional and non-functional requirements
+
+|               | Description                                                                                                                                                                                                         | Where assessed?                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| ***Level 3*** | The engineer can code a solution that functionally and non-functionally meets requirements for **several simple** requirements                                                                                      | Code submitted (*Core features fully implemented* ) |
+| ***Level 3*** | The engineer can write code that is **functionally correct** and can use **Generative AI** to help **refactor** code | Code submitted and Markdown file in `docs` folder |
+| ***Level 4*** | The engineer can code a solution that functionally and non-functionally meets requirements for a *small number* of ***complex*** requirements (e.g. requirements requiring multiple functions or breaking down to fulfil)          | Code submitted (*some/all additional features implemented*) |
+| ***Level 4*** | The engineer can code a solution that functionally and non-functionally meets requirements and can participate in group reviews of code identifying opportunities to make it more efficient and/or cleaner with the help of a Generative AI tool where appropriate | Code review issues in GitHub |
+| ***Level 5*** | The engineer can code a solution that functionally and non-functionally meets requirements for a **number** of **complex** requirements | Code structure - separate servers for authentication and functionality |
+
+---
+
+### Can interpret business requirements into coding requirements
+  
+|               | Description                                                                                                                                                                                                  | Where assessed?                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
+| ***Level 1*** | The engineer can create **simple user stories** from user requirements (i.e. clearly defined story using “As a”, “Able to”, “So that” or “Given/When/Then” structure that could be solved using simple code) | Markdown file in `docs` folder  |
+
+| ***Level 3*** | The engineer can create **routing diagrams** and/or apply object-oriented principles in them for ***simple*** user stories | Markdown file in `docs` folder and code submitted (*Some of core features implemented*) |
+| ***Level 4*** | The engineer can create **routing diagrams** and/or apply object-oriented principles in them for ***moderately complex*** user stories (i.e. user stories that require multiple objects/domain models to fulfil) | Markdown file in `docs` folder and code submitted (*Core features fully implemented*) |
+| ***Level 5*** | The engineer can create **routing diagrams** and/or apply object-oriented principles in them for ***complex*** user stories (i.e. user stories that require multiple objects/domain models and/or breaking down further to fulfil) | Markdown file in `docs` folder and code submitted (*Additional features attempted with some success*) |
+
+---
+
+### Develop code through Test-Driven Development and/or Behaviour Driven Development
+
+|               | Description                                                                                                                                                                                                 | Where assessed?                        |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| ***Level 2*** | The engineer can write **tests** and/or **working code** that demonstrates that the **TDD process** has been followed through a commit history with clear commit messages                                   | Code submitted - GitHub commit history |
+| ***Level 3*** | The engineer can write **tests** and/or **working code** that pass covering the **main functionality** of the code using a standard, **third-party** testing framework | Code submitted |
+| ***Level 3*** | The engineer can write **tests** and/or **working code** that demonstrates the use of a **Generative AI** tool to identify and write test cases and/or code for tests | Code submitted and Markdown file in `docs` folder |
+| ***Level 4*** | The engineer can write **tests** and/or **working code** that passes tests that cover **some edge cases** of the code **that they have identified** using a standard, **third-party** testing framework | Code submitted |
+| ***Level 4*** | The engineer can write **tests** and/or **working code** that demonstrates the use of a **Generative AI** tool to identify and write tests for **further edge cases** | Code submitted and Markdown file in `docs` folder |
+| ***Level 5*** | The engineer can write **tests** and/or **working code** that passes tests that cover most **edge cases** of the code using a standard, **third-party** testing framework | Code submitted and Markdown file in `docs` folder |
+| ***Level 5*** | The engineer can write **tests** and/or **working code** that demonstrates the use of a **Generative AI** tool to identify and write tests for **further edge or corner cases** | Code submitted and Markdown file in `docs` folder |
+
+---
+
+### Writes clean code
+
+|                | Description                                                                                                                                                                                                       | Where assessed? |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| ***Level 2***  | The engineer can write code that is **functionally correct** using applying **some** principles of clean-coding (e.g. 5-line functions, no nested loops or conditional statements)                                | Code submitted  |
+| ***Level 2***  | The engineer can write code that is **functionally correct** and has been made **more efficient** by a **Generative AI** tool | Code submitted and Markdown file in `docs` folder |
+| ***Level 2***  | The engineer can write code that is **functionally correct** and has **demonstrated** the use of **Generative AI** to help within the **debugging** process | Code submitted and Markdown file in `docs` folder |
+| ***Level 3***  | The engineer can write code that is **functionally correct** using applying **single responsibility** and other clean-coding practices (e.g. **abstraction**) to **some** of the classes/functions/methods and blocks of code | Code submitted  |
+| ***Level 3*** | The engineer can write code that is **functionally correct** and can use **Generative AI** to help **refactor** code | Code submitted and Markdown file in `docs` folder |
+| ***Level 4***  | The engineer can write code that is **functionally correct** using applying **single responsibility** and other clean-coding practices (e.g. **abstraction**) to **most** of the classes/functions/methods and blocks of code | Code submitted  |
+| ***Level 4*** | The engineer can write code that is **functionally correct** and can use **Generative AI** to help **document their own** or the **code of others** | Code submitted and Markdown file in `docs` folder |
+| ***Level 5***  | The engineer can write code that is **functionally correct** using applying **single responsibility** and other clean-coding practices (e.g. **abstraction**) to all of the classes/functions/methods and blocks of code to create **loosely-coupled**, **highly-cohesive** code | Code submitted and Markdown file in `docs` folder |
+
+---
+
+### Creates Backend Services meeting requirements
+
+|                | Description                                                                                                                                                                                                       | Where assessed? |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| ***Level 1***  | The engineer can create backend service that can handle **simple requests** with **simple responses** | Code submitted  |
+| ***Level 2***  | The engineer can create backend service that can handle **different request types** to the same route, **send appropriate responses** and have logic that is tested | Code submitted  |
+| ***Level 3***  | The engineer can create backend service that can handle **different request types** to similar routes and **interface** with a **database** | Code submitted  |
+| ***Level 3***  | The engineer can create backend service that can send **appropriate responses** that are **tested** | Code submitted  |
+| ***Level 4***  | The engineer can create backend service that can handle **different request types** to similar routes, carrying out *validation* and *verification* of *request data* | Code submitted  |
+| ***Level 4***  | The engineer can create backend service that return **response objects** with *appropriate status codes* and *data* using a **service-controller** architecture | Code submitted  |
+| ***Level 5***  | The engineer can create backend service that can handle and ***authenticate*** requests to **complex** routes | Code submitted  |
 
 ---
 
@@ -164,7 +229,52 @@ TBC
 
 In this Challenge, you will have the opportunity to demonstrate the following competencies from the Professional Skills Progression Management framework:
 
-TBC
+---
+
+### Communications
+
+|               | Description                                                                                            | Where assessed?                |
+| ------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------ |
+| ***Level 1*** | Can express themselves fluently in both verbal and written English                                     | Markdown file in `docs` folder |
+| ***Level 1*** | Demonstrates attentive listening                                                                       | During assignment introduction |
+| ***Level 2*** | Convey technical information to technical stakeholders in both verbal and written forms                | Markdown file in `docs` folder |
+| ***Level 2*** | Creates content to a professional standard that is concise, well-structured, and grammatically correct | Markdown file in `docs` folder |
+| ***Level 3*** | Articulates complex technical concepts with clarity and precision across both verbal and written forms. | Markdown file in `docs` folder |
+
+---
+
+### Business Awareness
+
+|               | Description                                                                                                                                  | Where assessed?                                    |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| ***Level 1*** | Recognises importance of customer/stakeholder-centricity                                                                                     | Markdown file in `docs` folder                     |
+| ***Level 2*** | Applies basic requirement elicitation techniques and can gather and document simple requirements that align towards the business’ objectives | Markdown file in `docs` folder                     |
+| ***Level 3*** | Creates clear project documentation detailing project objectives, approach and results                                                       | Markdown file in `docs` folder and in code files   |
+| ***Level 3*** | Applies prioritisation techniques to ensure resource efficiency and project alignment within timescales and business objectives              | Markdown file in `docs` folder (Trello screenshot) |
+
+---
+
+### Professional Development (Assessed after submission via Self-Review)
+
+|               | Description                                                                                                    | Where assessed?                  |
+| ------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| ***Level 1*** | Demonstrates ability to listen to and act on constructive feedback or new ideas from others | SMART Goal Review |
+| ***Level 2*** | Constructs SMART goal based on their identified areas of improvement | SMART goal review |
+| ***Level 2*** | Achieves a self-made SMART goal | Previous SMART goal review |
+| ***Level 3*** | Demonstrates consistency in achieving small to medium (<2 weeks) SMART goals (x3 goals)  | SMART Goal review |
+| ***Level 3*** | Provides constructive input to peers and can communicate feedback in a supportive and helpful manner | Peer review comments |
+| ***Level 3*** | Demonstrates ability to experiment with new techniques or approaches that work best for them | In code - Testing; In docs - Component Hierarchies |
+
+---
+
+### Adaptability
+
+|               | Description                                                                                                             | Where assessed?                                  |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| ***Level 1*** | Individual may notice when processes, procedures, or tasks are altered but may not be entirely comfortable with changes | Markdown file in `docs` folder                   |
+| ***Level 1*** | Demonstrates openness to making minor-in-scope adjustments to their plans and tasks in response to changes              | Markdown file in `docs` folder                   |
+| ***Level 2*** | Understands fundamental Agile terms, such as User Stories, Scrum, Kanban, and the Agile Manifesto                       | Project files and Markdown file in `docs` folder |
+| ***Level 3*** | Demonstrates experimentation with different approaches, tools, or methods                                               | Project files and Markdown file in `docs` folder |
 
 ---
 
