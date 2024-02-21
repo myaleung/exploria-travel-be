@@ -87,6 +87,12 @@ The Product Owner at DFCorp has also identified a number of additional features 
 4. Create the application using a test-driven development (TDD) approach and the NodeJS/Express/MongoDB stack
 5. Create a set of tests that validate the functionality of the backend services using POSTMAN
 
+### Bonus Task (Strictly optional but would be great!)
+
+Can you deploy the frontend and backend to cloud services such as Netlify and Render and implement a cloud-based database?
+
+If you can, provide links to your deployed applications and databases in the markdown file in the `docs` folder.  This should include a **username** and **password** that can be used to test the deployment.
+
 ---
 
 ## Tips
