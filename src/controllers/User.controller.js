@@ -5,15 +5,12 @@ export default class UserController {
 
   constructor(service = new UserService()) {
     this.#service = service;
-    // Needed to keep the context of this with the instance of the controller
-    // this.getUsersFunc = this.getUsersFunc.bind(this);
   }
 
   getUsers = async (req, res) => {
     try {
       res.json(await this.#service.getUsers());
     } catch (e) {
-      // console.log(e);
       res.status(500).json({ message: e.message });
     }
   };
@@ -33,29 +30,20 @@ export default class UserController {
     }
   };
 
-  //   editUser = async (req, res) => {
-  //     const { id } = req.params;
-  //     const { body } = req;
-  //     try {
-  //       !id && res.status(400).json({ message: "Invalid id" });
-  //       !body && res.status(400).json({ message: "Invalid request body" });
+  editUser = async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+    try {
+      !id && res.status(400).json({ message: "Invalid id" });
+      !body && res.status(400).json({ message: "Invalid request body" });
 
-  //       const updatedUser = await this.#service.editUser(body, id);
+      const updatedUser = await this.#service.editUser(body, id);
 
-  //       !updatedUser && res.status(404).json({ message: "User not found" });
+      !updatedUser && res.status(404).json({ message: "User not found" });
 
-  //       res.status(202).json(updatedUser);
-  //     } catch (e) {
-  //       res.status(500).json({ message: e.message });
-  //     }
-  //   };
-
-  // async getUsersFunc(req, res) {
-  //   try {
-  //     res.json(await this.#service.getUsers());
-  //   } catch (e) {
-  //     // console.log(e);
-  //     res.status(500).json({ message: e.message });
-  //   }
-  // }
+      res.status(202).json(updatedUser);
+    } catch (e) {
+      res.status(500).json({ message: e.message });
+    }
+  };
 }

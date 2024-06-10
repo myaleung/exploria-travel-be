@@ -2,7 +2,6 @@ import User from "../models/User.model.js";
 
 export default class UserService {
   getUsers = async () => {
-    // return "Getting Todos from service";
     return await User.find({});
   };
 
@@ -16,9 +15,9 @@ export default class UserService {
     return await user.save();
   };
 
-  // editUser = async (updatedUser, id) => {
-  //   return await User.findOneAndUpdate({ _id: id }, updatedUser, {
-  //     new: true,
-  //   });
-  // };
+  editUser = async (updatedUser, id) => {
+    return await User.findOneAndUpdate({ _id: id }, updatedUser, {
+      new: true,
+    });
+  };
 }

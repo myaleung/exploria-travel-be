@@ -15,18 +15,17 @@ export default class UserRoutes {
   }
 
   #initialiseRoutes = () => {
-    // Temporary route handling function in lieu of real data!
-    // this.#router.get("/", (req, res) => res.end("Getting Todos"));
-
-    this.#router.get("/", this.#controller.getUsers);
-    // this.#router.get("/func", this.#controller.getUsersFunc);
-    this.#router.post("/", UserValidator.validate(), this.#controller.addUser);
-    // this.#router.put(
-    //   // :id is store in req.params
-    //   "/:id",
-    //   UserValidator.validate(),
-    //   this.#controller.editUser
-    // );
+    this.#router.get("/login", this.#controller.getUsers);
+    this.#router.post(
+      "/register",
+      UserValidator.validate(),
+      this.#controller.addUser
+    );
+    this.#router.put(
+      "/:_id",
+      UserValidator.validate(),
+      this.#controller.editUser
+    );
   };
 
   getRouter = () => {
