@@ -9,8 +9,27 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "NODE_ENV=development nodemon index.js",
+    "start-win": "SET NODE_ENV=development&&nodemon index.js",
+    "build": "NODE_ENV=production nodemon index.js",
+    "build-win": "SET NODE_ENV=production&&nodemon index.js",
+    "test": "NODE_ENV=test mocha --timeout 10000 --exit",
+    "test-win": "SET NODE_ENV=test&&mocha --timeout 10000 --exit --recursive",
+    "coverage": "NODE_ENV=test c8 -t html npm test",
+    "coverage-win": "SET NODE_ENV=test&&c8 -r html npm run test-win"
   },
   "author": "Amy Leung",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "c8": "^9.1.0",
+    "chai": "^5.1.1",
+    "mocha": "^10.4.0"
+  }
 }

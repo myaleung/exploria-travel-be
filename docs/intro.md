@@ -22,6 +22,5 @@ Users of the Travel Info Web Application are looking for a more personalised exp
 
 - **Security Breaches:** Storing user data centrally increases the risk of data breaches.
 - **Data Compliance:** Ensuring compliance with data protection regulations (e.g. GDPR) can be complex and costly.
--
 
 ### Conclusion

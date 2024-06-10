@@ -95,7 +95,7 @@ As a user, I want to be able to see a map of the location I've searched for in t
 
 As a user, I want to be able to see a list of hotels on the results page based on the searched location, so I can look to book a hotel for the week I'm staying.
 
-## Kanban Board
+## Kanban Board & Diagrams
 
-To help organise my tasks, tests and diagrams, I used Miro's features to create a kanban board and build diagrams.\
+To help organise my tasks, tests and diagrams, I used Miro's features to create a kanban board and build routing diagrams.\
 ![Kanban Board](image.png)
