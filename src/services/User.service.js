@@ -1,4 +1,6 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 import User from "../models/User.model.js";
 
 export default class UserService {
@@ -13,13 +15,19 @@ export default class UserService {
         return { status: 401, message: "Invalid password" };
       }
 
+      const accessToken = jwt.sign(
+        { email: body.email },
+        process.env.JWT_SECRET,
+        { expiresIn: 86400 }
+      );
+
       return {
         status: 200,
         id: user._id,
         fullName: user.fullName,
         email: user.email,
         // roles: authorities,
-        // accessToken: token,
+        accessToken: accessToken,
       };
     } catch (e) {
       return { status: 500, message: e.message };

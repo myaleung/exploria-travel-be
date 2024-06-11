@@ -15,6 +15,14 @@ export default class UserRoutes {
   }
 
   #initialiseRoutes = () => {
+    this.#router.use((req, res, next) => {
+      res.header(
+        `Access-Control-Allow-Headers`,
+        `x-access-token, Origin, Content-Type, Accept`
+      );
+      next();
+    });
+
     this.#router.get("/login", this.#controller.loginUser);
     this.#router.post(
       "/signup",

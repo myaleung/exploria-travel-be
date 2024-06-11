@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+
 import UserService from "../services/User.service.js";
 
 export default class UserController {
