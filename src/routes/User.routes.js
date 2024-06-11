@@ -15,14 +15,14 @@ export default class UserRoutes {
   }
 
   #initialiseRoutes = () => {
-    this.#router.get("/login", this.#controller.getUsers);
+    this.#router.get("/login", this.#controller.loginUser);
     this.#router.post(
-      "/register",
+      "/signup",
       UserValidator.validate(),
       this.#controller.addUser
     );
     this.#router.put(
-      "/:_id",
+      "/edit/:_id",
       UserValidator.validate(),
       this.#controller.editUser
     );

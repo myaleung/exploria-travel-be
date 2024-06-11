@@ -16,7 +16,9 @@
     "test": "NODE_ENV=test mocha --timeout 10000 --exit",
     "test-win": "SET NODE_ENV=test&&mocha --timeout 10000 --exit --recursive",
     "coverage": "NODE_ENV=test c8 -t html npm test",
-    "coverage-win": "SET NODE_ENV=test&&c8 -r html npm run test-win"
+    "coverage-win": "SET NODE_ENV=test&&c8 -r html npm run test-win",
+    "seed": "NODE_ENV=development node seed.js",
+    "seed-win": "SET NODE_ENV=development&&node seed.js"
   },
   "author": "Amy Leung",
   "license": "ISC",

@@ -7,9 +7,9 @@ export default class UserController {
     this.#service = service;
   }
 
-  getUsers = async (req, res) => {
+  loginUser = async (req, res) => {
     try {
-      res.json(await this.#service.getUsers());
+      res.json(await this.#service.loginUser(req.body));
     } catch (e) {
       res.status(500).json({ message: e.message });
     }

@@ -6,6 +6,11 @@ export default class UserValidator {
       return [
         expressValidator.body("_id").optional().isMongoId(),
         expressValidator
+          .body("fullName")
+          .notEmpty()
+          .isString()
+          .withMessage("Please enter your full name"),
+        expressValidator
           .body("email")
           .notEmpty()
           .isString()

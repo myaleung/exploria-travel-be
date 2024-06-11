@@ -23,7 +23,7 @@ export default class Server {
     this.#server = this.#app.listen(this.#port, this.#host, () => {
       console.log(`Server is listening on http://${this.#host}:${this.#port}`);
     });
-    // this.#app.use(express.json());
-    // this.#app.use(this.#router.getRouteStartPoint(), this.#router.getRouter());
+    this.#app.use(express.json());
+    this.#app.use(this.#router.getRouteStartPoint(), this.#router.getRouter());
   };
 }

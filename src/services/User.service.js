@@ -1,8 +1,28 @@
 import User from "../models/User.model.js";
 
 export default class UserService {
-  getUsers = async () => {
-    return await User.find({});
+  loginUser = async (body) => {
+    try {
+      const user = await User.findOne({ email: body.email });
+      if (!user) {
+        return { status: 404, message: `User with ${body.email} not found` };
+      }
+      if (user.password !== body.password) {
+        return { status: 401, message: "Invalid password" };
+      }
+
+      return {
+        status: 200,
+        id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        password: user.password,
+        // roles: authorities,
+        // accessToken: token,
+      };
+    } catch (e) {
+      return { status: 500, message: e.message };
+    }
   };
 
   addUser = async (newUser) => {
