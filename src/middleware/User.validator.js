@@ -14,11 +14,24 @@ export default class UserValidator {
           .body("email")
           .notEmpty()
           .isString()
+          .trim()
+          .isEmail()
+          .normalizeEmail({
+            all_lowercase: true,
+          })
           .withMessage("An email address is required"),
         expressValidator
           .body("password")
           .notEmpty()
           .isString()
+          .trim()
+          .isStrongPassword({
+            minLength: 8,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
+          })
           .withMessage("A valid password should be provided"),
         UserValidator.handleValidationErrors,
       ];

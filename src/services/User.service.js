@@ -29,10 +29,10 @@ export default class UserService {
     let user;
     try {
       user = new User(newUser);
+      return await user.save();
     } catch (e) {
       throw new Error("Invalid User");
     }
-    return await user.save();
   };
 
   editUser = async (updatedUser, id) => {

@@ -10,8 +10,8 @@ const database = new Database(DB_URI);
 const users = [
   new User({
     fullName: "Sam White",
-    email: "samwwhite@gmail.com",
-    password: "password123",
+    email: "samwhite@gmail.com",
+    password: "Password123$",
     role: "user",
   }),
 ];
