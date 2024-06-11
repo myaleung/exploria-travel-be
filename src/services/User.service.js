@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import User from "../models/User.model.js";
 
 export default class UserService {
@@ -7,7 +8,8 @@ export default class UserService {
       if (!user) {
         return { status: 404, message: `User with ${body.email} not found` };
       }
-      if (user.password !== body.password) {
+
+      if (!bcrypt.compareSync(body.password, user.password)) {
         return { status: 401, message: "Invalid password" };
       }
 
@@ -16,7 +18,6 @@ export default class UserService {
         id: user._id,
         fullName: user.fullName,
         email: user.email,
-        password: user.password,
         // roles: authorities,
         // accessToken: token,
       };
@@ -25,10 +26,10 @@ export default class UserService {
     }
   };
 
-  addUser = async (newUser) => {
+  addUser = async (userDetails) => {
     let user;
     try {
-      user = new User(newUser);
+      user = new User(userDetails);
       return await user.save();
     } catch (e) {
       throw new Error("Invalid User");

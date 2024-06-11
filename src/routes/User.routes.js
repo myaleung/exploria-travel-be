@@ -18,7 +18,7 @@ export default class UserRoutes {
     this.#router.get("/login", this.#controller.loginUser);
     this.#router.post(
       "/signup",
-      // UserValidator.validate(),
+      UserValidator.validate(),
       this.#controller.addUser
     );
     this.#router.put(

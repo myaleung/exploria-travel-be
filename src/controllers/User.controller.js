@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import UserService from "../services/User.service.js";
 
 export default class UserController {
@@ -17,9 +18,17 @@ export default class UserController {
 
   addUser = async (req, res) => {
     const invalidError = new Error("Invalid User");
+    const salt = bcrypt.genSaltSync(10);
     try {
       if (!req.body) throw invalidError;
-      const newUser = await this.#service.addUser(req.body);
+
+      const userDetails = {
+        fullName: req.body.fullName,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, salt),
+      };
+
+      const newUser = await this.#service.addUser(userDetails);
       if (!newUser._id) throw new Error("Unable to create user");
       res.status(201).json(newUser);
     } catch (e) {
