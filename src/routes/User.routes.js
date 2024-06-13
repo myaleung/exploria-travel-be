@@ -21,7 +21,6 @@ export default class UserRoutes {
       next();
     });
 
-    this.#router.post("/results", this.#controller.fetchWeatherData);
     this.#router.post(
       "/saved-locations",
       authJwt.verifyToken,
