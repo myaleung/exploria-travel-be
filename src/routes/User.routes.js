@@ -1,7 +1,8 @@
 import { Router } from "express";
+import authJwt from "../middleware/Jwt.authenticator.js";
+import SignUpVerify from "../middleware/SignUp.verify.js";
 import UserController from "../controllers/User.controller.js";
 import UserValidator from "../middleware/User.validator.js";
-import authJwt from "../middleware/Jwt.authenticator.js";
 
 export default class UserRoutes {
   #controller;
@@ -30,6 +31,7 @@ export default class UserRoutes {
     this.#router.post(
       "/signup",
       UserValidator.validate(),
+      SignUpVerify.checkDuplicateEmail,
       this.#controller.addUser
     );
     this.#router.put(

@@ -12,8 +12,10 @@ describe("User Service", () => {
     userService = new UserService();
   });
 
-  describe.skip("loginUser Tests", () => {
+  /*! Unsure how to test this login function but the routes work in postman*/
+  describe("loginUser Tests", () => {
     let findOneStub;
+    let findUserStub;
 
     beforeEach(() => {
       findOneStub = sinon.stub(User, "findOne");
@@ -35,33 +37,37 @@ describe("User Service", () => {
       expect(findOneStub.calledOnce).to.be.true;
     });
 
-    it("Should return a user object if they exist in db", async () => {
+    it.skip("Should return a user object if they exist in db", async () => {
       const user = {
         status: 200,
-        id: [undefined],
+        id: "6668c67420db202d569218ce",
         fullName: "John Doe",
         email: "john@doe.net",
       };
+      const login = {
+        email: "john@doe.net",
+        password: "Password123*.",
+      };
       findOneStub.resolves(user);
 
-      const result = await userService.loginUser(user.email);
+      const result = await userService.loginUser(login);
       expect(result).to.equal(user);
     });
 
-    it("Should throw error if user does not exist in db", async () => {
+    it.skip("Should throw error if user does not exist in db", async () => {
       const invalidUser = {
         fullName: "Fake Person",
         email: "fake@faker.net",
-        password: "Somepass1",
+        password: "SomePassword1",
       };
-      const error = new Error("User not found");
+      const error = new Error(`User with ${invalidUser.email} not found`);
       findOneStub.throws(error);
 
       try {
-        await userService.loginUser(invalidUser.email);
+        await userService.loginUser(invalidUser.email, invalidUser.password);
         assert.fail("Expected error was not thrown");
       } catch (e) {
-        expect(e).to.equal(error);
+        expect(e.message).to.equal(error.message);
       }
     });
   });
