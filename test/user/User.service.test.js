@@ -1,4 +1,5 @@
-import { expect } from "chai";
+import { expect, assert } from "chai";
+import supertest from "supertest";
 import sinon from "sinon";
 
 import User from "../../src/models/User.model.js";
@@ -89,7 +90,7 @@ describe("User Service", () => {
         await userService.addUser(invalidUser);
         assert.fail("Expected error was not thrown");
       } catch (e) {
-        expect(e).to.equal(error);
+        expect(e.message).to.equal(error.message);
       }
 
       saveStub.restore();

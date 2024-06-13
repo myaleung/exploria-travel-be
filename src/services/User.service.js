@@ -40,7 +40,7 @@ export default class UserService {
       user = new User(userDetails);
       return await user.save();
     } catch (e) {
-      throw new Error("Invalid User, account may already exist");
+      throw new Error("Invalid User");
     }
   };
 
