@@ -18,7 +18,7 @@ export default class UserService {
       const accessToken = jwt.sign(
         { email: body.email },
         process.env.JWT_SECRET,
-        { expiresIn: 86400 }
+        { expiresIn: "30d" }
       );
 
       return {
@@ -27,7 +27,7 @@ export default class UserService {
         fullName: user.fullName,
         email: user.email,
         // roles: authorities,
-        accessToken: accessToken,
+        token: accessToken,
       };
     } catch (e) {
       return { status: 500, message: e.message };
@@ -40,7 +40,7 @@ export default class UserService {
       user = new User(userDetails);
       return await user.save();
     } catch (e) {
-      throw new Error("Invalid User");
+      throw new Error("Invalid User, account may already exist");
     }
   };
 
@@ -48,5 +48,13 @@ export default class UserService {
     return await User.findOneAndUpdate({ _id: id }, updatedUser, {
       new: true,
     });
+  };
+
+  retrieveSavedLocations = async (email) => {
+    try {
+      return await User.findOne({ email: email });
+    } catch (e) {
+      res.status(404).json({ message: "User not found" });
+    }
   };
 }

@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 import UserService from "../services/User.service.js";
+import { use } from "chai";
 
 export default class UserController {
   #service;
@@ -52,6 +54,34 @@ export default class UserController {
       !updatedUser && res.status(404).json({ message: "User not found" });
 
       res.status(202).json(updatedUser);
+    } catch (e) {
+      res.status(500).json({ message: e.message });
+    }
+  };
+
+  showUserBookmarks = async (req, res) => {
+    try {
+      //go to service to get user bookmarks
+      const userSavedLocations = await this.#service.retrieveSavedLocations(
+        req.body.email
+      );
+      userSavedLocations &&
+        res.status(200).json(userSavedLocations.savedLocations);
+    } catch (e) {
+      res.status(500).json({ message: e.message });
+    }
+  };
+
+  fetchWeatherData = async (req, res) => {
+    try {
+      const locationAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${req.body.query}&appid=${process.env.WEATHER_API_KEY}`;
+      const locationResponse = await fetch(locationAPI);
+      if (locationResponse.length < 1) {
+        return res.status(404).json({ message: "Location not found" });
+      }
+      const weatherForecastAPI = `http://api.openweathermap.org/data/2.5/forecast?lat=${locationResponse[0].lat}&lon=${locationResponse[0].lon}&appid=${process.env.WEATHER_API_KEY}`;
+      const weatherForecastResponse = await fetch(weatherForecastAPI);
+      res.status(200).json(weatherForecastResponse);
     } catch (e) {
       res.status(500).json({ message: e.message });
     }

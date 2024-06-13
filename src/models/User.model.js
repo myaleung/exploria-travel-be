@@ -19,6 +19,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  savedLocations: [
+    {
+      city: {
+        type: String,
+      },
+      longitude: {
+        type: String,
+      },
+      latitude: {
+        type: String,
+      },
+    },
+  ],
 });
 
 const user = mongoose.model("User", userSchema);
