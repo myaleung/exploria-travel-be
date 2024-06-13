@@ -65,12 +65,47 @@ export default class UserController {
       const userSavedLocations = await this.#service.retrieveSavedLocations(
         req.body.email
       );
-      userSavedLocations &&
-        res.status(200).json(userSavedLocations.savedLocations);
+      userSavedLocations && res.status(200).json(userSavedLocations);
     } catch (e) {
       res.status(500).json({ message: e.message });
     }
   };
 
-  addToUserBookmarks = async (req, res) => {};
+  updateUserBookmarks = async (req, res) => {
+    try {
+      //check the city exists in user's saved locations
+      const locationExists = await this.#service.checkLocationExists(
+        req.body.email,
+        req.body.city,
+        req.body.lat,
+        req.body.lon
+      );
+
+      if (locationExists) {
+        //remove location from user bookmarks
+        const userSavedLocations = await this.#service.removeFromSavedLocations(
+          req.body.email,
+          req.body.city,
+          req.body.lat,
+          req.body.lon
+        );
+        userSavedLocations &&
+          res
+            .status(200)
+            .json({ message: "Location removed from user bookmarks" });
+      } else {
+        //go to service to add location to user bookmarks
+        const userSavedLocations = await this.#service.addToSavedLocations(
+          req.body.email,
+          req.body.city,
+          req.body.lat,
+          req.body.lon
+        );
+        userSavedLocations &&
+          res.status(200).json({ message: "Location added to user bookmarks" });
+      }
+    } catch (e) {
+      res.status(500).json({ message: e.message });
+    }
+  };
 }

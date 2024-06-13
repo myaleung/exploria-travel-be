@@ -22,12 +22,17 @@ export default class UserRoutes {
       next();
     });
 
+    this.#router.put(
+      "/save-location",
+      authJwt.verifyToken,
+      this.#controller.updateUserBookmarks
+    );
+    this.#router.post("/login", this.#controller.loginUser);
     this.#router.post(
       "/saved-locations",
       authJwt.verifyToken,
       this.#controller.showUserBookmarks
     ); // POST the email to get the saved locations
-    this.#router.post("/login", this.#controller.loginUser);
     this.#router.post(
       "/signup",
       UserValidator.validate(),

@@ -35,9 +35,8 @@ export default class UserService {
   };
 
   addUser = async (userDetails) => {
-    let user;
     try {
-      user = new User(userDetails);
+      const user = new User(userDetails);
       return await user.save();
     } catch (e) {
       throw new Error("Invalid User");
@@ -52,9 +51,59 @@ export default class UserService {
 
   retrieveSavedLocations = async (email) => {
     try {
-      return await User.findOne({ email: email });
+      const validUser = await User.findOne({ email: email });
+
+      if (validUser) {
+        return validUser.savedLocations;
+      }
     } catch (e) {
       res.status(404).json({ message: "User not found" });
     }
+  };
+
+  addToSavedLocations = async (email, city, lat, lon) => {
+    try {
+      const user = await User.findOne({ email: email });
+      if (user) {
+        user.savedLocations.push({ city: city, longitude: lon, latitude: lat });
+        return await user.save();
+      }
+    } catch (e) {
+      res.status(404).json({ message: "User not found" });
+    }
+  };
+
+  checkLocationExists = async (email, city, lat, lon) => {
+    try {
+      const user = await User.findOne({ email: email });
+      if (user) {
+        //check if location exists in saved locations
+        return user.savedLocations.some(
+          (location) =>
+            location.city === city &&
+            location.latitude == lat &&
+            location.longitude == lon
+        );
+      }
+    } catch (e) {
+      res.status(404).json({ message: "User not found" });
+    }
+  };
+
+  removeFromSavedLocations = async (email, city, lat, lon) => {
+    try {
+      const user = await User.findOne({ email: email });
+      if (user) {
+        const newSavedLocations = user.savedLocations.filter((location) => {
+          return (
+            location.city !== city &&
+            location.latitude !== lat &&
+            location.longitude !== lon
+          );
+        });
+        user.savedLocations = newSavedLocations;
+        return await user.save();
+      }
+    } catch (e) {}
   };
 }

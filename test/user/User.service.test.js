@@ -15,7 +15,6 @@ describe("User Service", () => {
   /*! Unsure how to test this login function but the routes work in postman*/
   describe("loginUser Tests", () => {
     let findOneStub;
-    let findUserStub;
 
     beforeEach(() => {
       findOneStub = sinon.stub(User, "findOne");
