@@ -1,6 +1,7 @@
 import { Router } from "express";
 import authJwt from "../middleware/Jwt.authenticator.js";
 import SignUpVerify from "../middleware/SignUp.verify.js";
+import PasswordValidator from "../middleware/Password.validator.js";
 import UserController from "../controllers/User.controller.js";
 import UserValidator from "../middleware/User.validator.js";
 
@@ -40,9 +41,10 @@ export default class UserRoutes {
       this.#controller.addUser
     );
     this.#router.put(
-      "/edit/:_id",
-      UserValidator.validate(),
-      this.#controller.editUser
+      "/edit/:id",
+      authJwt.verifyToken,
+      PasswordValidator.validate(),
+      this.#controller.editUserPw
     );
   };
 

@@ -43,8 +43,8 @@ export default class UserService {
     }
   };
 
-  editUser = async (updatedUser, id) => {
-    return await User.findOneAndUpdate({ _id: id }, updatedUser, {
+  editUserPw = async (updatedPw, id) => {
+    return await User.findOneAndUpdate({ _id: id }, updatedPw, {
       new: true,
     });
   };

@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 import UserService from "../services/User.service.js";
 
@@ -42,18 +41,22 @@ export default class UserController {
     }
   };
 
-  editUser = async (req, res) => {
+  editUserPw = async (req, res) => {
     const { id } = req.params;
     const { body } = req;
+    const salt = bcrypt.genSaltSync(10);
+    const newPassword = bcrypt.hashSync(body.password, salt);
     try {
       !id && res.status(400).json({ message: "Invalid id" });
       !body && res.status(400).json({ message: "Invalid request body" });
-
-      const updatedUser = await this.#service.editUser(body, id);
+      const updatedUser = await this.#service.editUserPw(
+        { password: newPassword },
+        id
+      );
 
       !updatedUser && res.status(404).json({ message: "User not found" });
 
-      res.status(202).json(updatedUser);
+      res.status(200).json(updatedUser);
     } catch (e) {
       res.status(500).json({ message: e.message });
     }
@@ -72,22 +75,23 @@ export default class UserController {
   };
 
   updateUserBookmarks = async (req, res) => {
+    const { email, city, lat, lon } = req.body;
     try {
       //check the city exists in user's saved locations
       const locationExists = await this.#service.checkLocationExists(
-        req.body.email,
-        req.body.city,
-        req.body.lat,
-        req.body.lon
+        email,
+        city,
+        lat,
+        lon
       );
 
       if (locationExists) {
         //remove location from user bookmarks
         const userSavedLocations = await this.#service.removeFromSavedLocations(
-          req.body.email,
-          req.body.city,
-          req.body.lat,
-          req.body.lon
+          email,
+          city,
+          lat,
+          lon
         );
         userSavedLocations &&
           res
@@ -96,10 +100,10 @@ export default class UserController {
       } else {
         //go to service to add location to user bookmarks
         const userSavedLocations = await this.#service.addToSavedLocations(
-          req.body.email,
-          req.body.city,
-          req.body.lat,
-          req.body.lon
+          email,
+          city,
+          lat,
+          lon
         );
         userSavedLocations &&
           res.status(200).json({ message: "Location added to user bookmarks" });
