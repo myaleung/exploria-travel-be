@@ -1,7 +1,6 @@
 import User from "../models/User.model.js";
 
 const checkDuplicateEmail = async (req, res, next) => {
-  console.log(req.body);
   //Check if email exists
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -10,7 +9,7 @@ const checkDuplicateEmail = async (req, res, next) => {
     }
     next();
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
   }
 };
 

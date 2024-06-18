@@ -18,11 +18,6 @@ export default class UserRoutes {
   }
 
   #initialiseRoutes = () => {
-    this.#router.use((req, res, next) => {
-      res.header(`x-access-token, Origin, Content-Type, Accept`);
-      next();
-    });
-
     this.#router.put(
       "/save-location",
       authJwt.verifyToken,
@@ -35,7 +30,7 @@ export default class UserRoutes {
       this.#controller.showUserBookmarks
     ); // POST the email to get the saved locations
     this.#router.post(
-      "/signup",
+      "/sign-up",
       UserValidator.validate(),
       SignUpVerify.checkDuplicateEmail,
       this.#controller.addUser

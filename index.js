@@ -1,4 +1,3 @@
-import cors from "cors";
 import Config from "./src/db/db.config.js";
 import Database from "./src/db/database.js";
 import Server from "./src/server/server.js";

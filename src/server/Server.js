@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 
 export default class Server {
@@ -20,11 +21,11 @@ export default class Server {
   };
 
   start = () => {
+    this.#app.use(cors());
     this.#server = this.#app.listen(this.#port, this.#host, () => {
       console.log(`Server is listening on http://${this.#host}:${this.#port}`);
     });
     this.#app.use(express.json());
-    // this.#app.use(this.#router.getRouteStartPoint(), this.#router.getRouter());
     this.#router.getRouter().forEach((router) => {
       this.#app.use(router.getRouteStartPoint(), router.getRouter());
     });

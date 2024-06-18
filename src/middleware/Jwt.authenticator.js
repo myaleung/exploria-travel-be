@@ -1,20 +1,32 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.model.js";
 
-const verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
+const verifyToken = async (req, res, next) => {
+  let token;
 
-  if (!token) {
-    return res.status(403).send({ message: `No token provided` });
-  }
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith(`Bearer`)
+  ) {
+    try {
+      // Get token from the header
+      token = req.headers.authorization.split(' ')[1];
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).send({ message: `Unauthorised` });
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      //Get user from token
+      req.user = await User.findById(decoded.id).select('-password');
+      next();
+    } catch (e) {
+      res.status(401).send({ message: `Unauthorized` });
+      return;
     }
-
-    req.body.email = decoded.email;
-    next();
-  });
+  };
+  
+  if (!token) {
+    return res.status(401).send({ message: `No token provided` });
+  }
 };
 
 const isUser = (req, res, next) => {
@@ -24,24 +36,18 @@ const isUser = (req, res, next) => {
       return;
     }
 
-    Role.find({ _id: { $in: user.roles } }, (err, roles) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-      if (roles.name === `user`) {
-        next();
-        return;
-      }
-      res.status(403).send({ message: `Request requires a logged in user` });
+    const userRole = user.role;
+    if (userRole === `user`) {
+      next();
       return;
-    });
+    }
+    res.status(403).send({ message: `Request requires a logged in user` });
+    return;
   });
 };
 
 const authJwt = {
   verifyToken,
-  //   isAdmin,
   isUser,
 };
 
