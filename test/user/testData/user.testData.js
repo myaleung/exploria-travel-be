@@ -30,7 +30,13 @@ const testUserData = [
     password: "$2b$10$PPbmftnqV8VlhKi63xakYugu/M/aSixKKvqUpWHgsowtOd83rTBc6",
     role: "user",
     __v: 0,
-    savedLocations: [],
+    savedLocations: [
+      {
+        city: "Taipei",
+        longitude: 121.5654,
+        latitude: 25.033,
+      },
+    ],
   },
   {
     _id: "6668c67420db202d569218ce",

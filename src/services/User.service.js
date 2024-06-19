@@ -42,7 +42,7 @@ export default class UserService {
       user.savedLocations.push({ city: city, longitude: lon, latitude: lat });
       return await user.save();
     } catch (e) {
-      throw new Error("User not found");
+      throw new Error(e.message);
     }
   };
 
@@ -61,7 +61,7 @@ export default class UserService {
         return {user: user, locationExists: locationExists};
       }
     } catch (e) {
-      throw new Error(e.message + "User not found..");
+      throw new Error(e.message);
     }
   };
 

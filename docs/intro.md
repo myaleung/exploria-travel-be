@@ -24,3 +24,18 @@ Users of the Travel Info Web Application are looking for a more personalised exp
 - **Data Compliance:** Ensuring compliance with data protection regulations (e.g. GDPR) can be complex and costly.
 
 ### Conclusion
+The travel application is able to locate a 5-day weather forecast and successfully call the weather API to return accurate data based on the location the user queries. Users are also able to save their favourite locations to their profile which will store the location data against their document in the database. Account creation is successful and my verification and tokens are also implemented but I feel the verification messages aren't succinct when sent to the frontend.
+Pathways for logged in users are protected and shown to those with verified tokens. 
+
+I wasn't able to fully test the application with Mocha and Chai and did have trouble mocking all the instances and having a good coverage of the application due to time constraints.
+
+## Setup
+```
+Start Project
+npm run start       - for Mac OS
+npm run start-win   - for Window users
+
+Run Tests
+npm run test        - for Mac OS
+npm run test-win    - for Window users
+```

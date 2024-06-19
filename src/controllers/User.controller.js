@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import UserService from "../services/User.service.js";
-import user from "../models/User.model.js";
 
 export default class UserController {
   #service;
@@ -30,6 +29,7 @@ export default class UserController {
         id: result._id,
         fullName: result.fullName,
         email: result.email,
+        role: result.role,
         token: this.generateToken(result._id),
       });
     } catch (e) {

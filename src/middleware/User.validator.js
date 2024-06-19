@@ -36,8 +36,7 @@ export default class UserValidator {
         UserValidator.handleValidationErrors,
       ];
     } catch (e) {
-      console.log(e);
-      return [];
+      throw new Error(e.message);
     }
   };
 

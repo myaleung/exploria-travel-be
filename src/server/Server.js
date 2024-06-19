@@ -30,4 +30,8 @@ export default class Server {
       this.#app.use(router.getRouteStartPoint(), router.getRouter());
     });
   };
+
+  close = () => {
+    this.#server.close();
+  };
 }

@@ -49,24 +49,16 @@ describe("User Service", () => {
         expect(findOneStub.calledOnce).to.be.true;
       });
 
-      /* Unsure how to pass this login function test as the 'id' doesn't seem to be mocked */
-      it.skip("Should return a user object if they exist in db", async () => {
-        const user = {
-          status: 200,
-          id: "6668c67420db202d569218ce",
-          fullName: "John Doe",
-          email: "john@doe.net",
-          token: "mockToken",
-        };
+      it("Should return a user object if they exist in db", async () => {
         const login = {
           email: "john@doe.net",
           password: "Pass123.",
         };
-        findOneStub.resolves(user);
+        findOneStub.resolves(testUserData[3]);
         jwtStub.returns("mockToken");
 
         const result = await userService.loginUser(login);
-        expect(result).to.deep.equal(user);
+        expect(result).to.deep.equal(testUserData[3]);
       });
 
       it("Should throw error if user does not exist in db", async () => {
@@ -158,15 +150,18 @@ describe("User Service", () => {
   describe("Saved Locations Tests", () => {
     describe("retrieveSavedLocations Tests", () => {
       let findOneStub;
+      let findByIdStub;
       let jwtStub;
 
       beforeEach(() => {
         findOneStub = sinon.stub(User, "findOne");
+        findByIdStub = sinon.stub(User, "findById");
         jwtStub = sinon.stub(jwt, "sign");
       });
 
       afterEach(() => {
         findOneStub.restore();
+        findByIdStub.restore();
         jwtStub.restore();
       });
 
@@ -180,11 +175,9 @@ describe("User Service", () => {
         ];
 
         jwtStub.returns("mockToken");
-        findOneStub.returns(testUserData[1]);
+        findByIdStub.returns(testUserData[1]);
 
-        const result = await userService.retrieveSavedLocations(
-          testUserData[1].email
-        );
+        const result = await userService.retrieveSavedLocations(testUserData[1].id);
 
         expect(result).to.deep.equal(expectedLocation);
       });
@@ -192,19 +185,15 @@ describe("User Service", () => {
       it("Should return empty array if no saved locations are under valid email", async () => {
         const expectedLocation = [];
         jwtStub.returns("mockToken");
-        findOneStub.returns(testUserData[2]);
+        findByIdStub.returns(testUserData[0]);
 
-        const result = await userService.retrieveSavedLocations(
-          testUserData[2].email
-        );
+        const result = await userService.retrieveSavedLocations(testUserData[0].id);
 
         expect(result).to.deep.equal(expectedLocation);
       });
 
-      it.skip("Should throw error if invalid email is provided", async () => {
-        const invalidUser = {
-          email: "fake@faker.net",
-        };
+      it("Should throw error if invalid email is provided", async () => {
+        const invalidUserId = "666b4846d9d68c688ab7459e";
         const error = new Error(`User not found`);
         // Mock res object
         const res = {
@@ -217,23 +206,22 @@ describe("User Service", () => {
         try {
           await userService.retrieveSavedLocations(res);
         } catch (e) {
-          // expect(res.status.calledWith(404)).to.be.true;
-          // expect(res.json.calledOnce).to.be.true;
-          // expect(e.message).to.equal(error.message);
+          expect(res.status.calledWith(404)).to.be.true;
+          expect(res.json.calledOnce).to.be.true;
           expect(res.json.calledWith({ message: "User not found" })).to.be.true;
         }
       });
     });
 
     describe("addToSavedLocations Tests", () => {
-      let findOneStub;
+      let findByIdStub;
       let saveStub;
       let hashStub;
       let hashCompareStub;
       let jwtStub;
 
       beforeEach(() => {
-        findOneStub = sinon.stub(User, "findOne");
+        findByIdStub = sinon.stub(User, "findById");
         saveStub = sinon.stub(User.prototype, "save");
         // Stub the bcrypt.hash method before each test
         hashStub = sinon.stub(bcrypt, "hash").resolves("mockHashedPassword");
@@ -242,7 +230,7 @@ describe("User Service", () => {
       });
 
       afterEach(() => {
-        findOneStub.restore();
+        findByIdStub.restore();
         saveStub.restore();
         // Restore the original method after each test
         bcrypt.hash.restore();
@@ -250,46 +238,32 @@ describe("User Service", () => {
         jwtStub.restore();
       });
 
-      it.skip("Should add a location to savedLocations array and save user", async () => {
-        const email = "test@user.co.uk";
+      it("Should check if location exists in array", async () => {
         const city = "Taipei";
         const lat = 25.033;
         const lon = 121.5654;
-        const expectedLocation = [
-          {
-            city: "Taipei",
-            longitude: 121.5654,
-            latitude: 25.033,
-          },
-        ];
 
-        findOneStub.returns(testUserData[1]);
+        findByIdStub.returns(testUserData[2]);
 
-        await userService.addToSavedLocations(email, city, lat, lon);
+        const result = await userService.checkLocationExists(testUserData[2], city, lat, lon);
 
-        // expect(result.savedLocations).to.deep.equal([
-        //   { city: city, longitude: lon, latitude: lat },
-        // ]);
-        expect(saveStub.calledOnce).to.be.true;
+        expect(result.user).to.equal(testUserData[2]);
+        expect(result.locationExists).to.be.true;
       });
 
-      it("Should not add a location if user is not found and return undefined", async () => {
-        const email = "fake@faker.net";
-        const city = "London";
-        const lat = 51.5085;
-        const lon = -0.1257;
+      it("Should throw error if invalid user is provided", async () => {
+        const city = "Taipei";
+        const lat = 25.033;
+        const lon = 121.5654;
+        const error = new Error("User not found");
 
-        findOneStub.returns(null);
+        findByIdStub.throws(error);
 
-        const result = await userService.addToSavedLocations(
-          email,
-          city,
-          lat,
-          lon
-        );
-
-        expect(result).to.be.undefined;
-        expect(saveStub.called).to.be.false;
+        try {
+          await userService.checkLocationExists(testUserData[0], city, lat, lon);
+        } catch (e) {
+          expect(e.message).to.equal(error.message);
+        }
       });
     });
   });
