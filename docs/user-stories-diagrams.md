@@ -146,34 +146,34 @@ As a user, I want to be able to see a list of hotels on the results page based o
 
 ## Kanban Board & Diagrams
 
-To help organise my tasks, tests and diagrams, I used Miro's features to create a kanban board and build routing diagrams.\
+To help organise my tasks, tests and diagrams, I used Miro's features to create a kanban board and build routing diagrams.  
 ![Kanban Board](images/kanban.png)
 
 ### Miro Board
 https://miro.com/app/board/uXjVKCXWVNQ=/?share_link_id=310189384549
 
 ## Gen AI
-Throughout the project I did incorporate the help of Gen AI to help understand code, especially with testing, and also how to implement infrastructures, as well as blog posts and videos.\
+Throughout the project I did incorporate the help of Gen AI to help understand code, especially with testing, and also how to implement infrastructures, as well as blog posts and videos.  
 
 ![Issue with findOne](images/image.png)
 
 **Checking how to implement JWT**
-I asked Co-Pilot on the usage of the token to check for authorised access and understand the process better.\
-![jwt token](images/image-1.png)\
-It also showed how I could complete this on the frontend so I was aware on how to collect the information later.\
+I asked Co-Pilot on the usage of the token to check for authorised access and understand the process better.  
+![jwt token](images/image-1.png)  
+It also showed how I could complete this on the frontend so I was aware on how to collect the information later.  
 ![frontend access token](images/image-2.png)
 ![backend verify token](images/image-3.png)
 
 **Testing**
-I had trouble understanding why my error message wasn't matching especially when the wording was the same in my test. Co-pilot explained that I needed to access the '.message' item to check the value of the message to make them equal.\
+I had trouble understanding why my error message wasn't matching especially when the wording was the same in my test. Co-pilot explained that I needed to access the '.message' item to check the value of the message to make them equal.  
 ![Error Testing](images/image-4.png)
 
 **Filtering Bookmarks**
-During the creation of the save location functionality, I did have a problem with the filtering of the bookmarks and couldn't get '.some' working. I had to ask Co-pilot the method to double check my understanding and also tried using a loop. It ended up being how I wasn't targeting the right array within the user document and therefore wasn't filtering correctly.\
+During the creation of the save location functionality, I did have a problem with the filtering of the bookmarks and couldn't get '.some' working. I had to ask Co-pilot the method to double check my understanding and also tried using a loop. It ended up being how I wasn't targeting the right array within the user document and therefore wasn't filtering correctly.  
 ![some function](images/image-5.png)
 
 **Refactoring**
-My update bookmarks method seemed long as it went from just adding a bookmark, to updating the bookmarks array and removing it if it existed. I asked Co-pilot on how I could refactor the code to make this method cleaner. I will look to incorporate this refactored version.\
+My update bookmarks method seemed long as it went from just adding a bookmark, to updating the bookmarks array and removing it if it existed. I asked Co-pilot on how I could refactor the code to make this method cleaner. I will look to incorporate this refactored version.  
 ```javascript
 updateUserBookmarks = async (req, res) => {
     const { city, lat, lon } = req.body;

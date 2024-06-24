@@ -10,6 +10,14 @@ export default class UserService {
     }
   };
 
+  getUser = async (id) => {
+    try {
+      return await User.findById(id);
+    } catch (e) {
+      return { status: 500, message: e.message };
+    }
+  };
+
   addUser = async (userDetails) => {
     try {
       const user = new User(userDetails);

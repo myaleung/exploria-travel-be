@@ -30,6 +30,7 @@ export default class UserController {
         fullName: result.fullName,
         email: result.email,
         role: result.role,
+        savedLocations: result.savedLocations,
         token: this.generateToken(result._id),
       });
     } catch (e) {
@@ -74,16 +75,20 @@ export default class UserController {
     const { id } = req.params;
     const { body } = req;
     const salt = bcrypt.genSaltSync(10);
-    const newPassword = bcrypt.hashSync(body.password, salt);
+    const newPassword = bcrypt.hashSync(body.newPassword, salt);
     try {
       if (!id) return res.status(400).json({ message: "Invalid id" });
       if (!body)
         return res.status(400).json({ message: "Invalid request body" });
+
+      const user = await this.#service.getUser(id);
+      if (!bcrypt.compareSync(body.oldPassword, user.password)) {
+        return res.status(401).json({ message: "Sorry your passwords don't match. Please try again." });
+      }
       const updatedUser = await this.#service.editUserPw(
         { password: newPassword },
         id
       );
-
       if (!updatedUser)
         return res.status(404).json({ message: "User not found" });
 

@@ -6,7 +6,7 @@ export default class PasswordValidator {
       return [
         expressValidator.body("_id").optional().isMongoId(),
         expressValidator
-          .body("password")
+          .body("newPassword")
           .notEmpty()
           .isString()
           .trim()
@@ -21,7 +21,7 @@ export default class PasswordValidator {
         PasswordValidator.handleValidationErrors,
       ];
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
       return [];
     }
   };
