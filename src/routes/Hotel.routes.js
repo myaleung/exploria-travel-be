@@ -14,7 +14,7 @@ export default class HotelRoutes {
   }
 
   #initialiseRoutes = () => {
-    this.#router.get("/hotels", this.#controller.showHotelResults);
+    this.#router.post("/hotels", this.#controller.showHotelResults);
   };
 
   getRouter = () => {

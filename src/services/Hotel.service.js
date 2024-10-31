@@ -21,6 +21,7 @@ export default class HotelService {
 
     try {
       const response = await axios.request(options);
+      // console.log("response", response, "return", response.data.data.data);
       return response.data.data.data;
     } catch (error) {
       console.error(error);
